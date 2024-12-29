@@ -38,22 +38,26 @@ struct debug {
 };  
 #define imie(...) " [" << #__VA_ARGS__ " : " << (__VA_ARGS__) << "]"
 
-void solve(){
-    string str;
-    cin >> str;
-    int currLen = 1;
-    int maxLen = 1;
-    for(int i = 1; i < str.size(); ++i){
-        if(str[i] == str[i - 1]){
-            currLen++;
+#define MOD 1000000007
+
+long long power(long long &n){
+    long long result = 1;
+    long long base = 2;
+    while(n > 0){
+        if(n % 2 == 1){
+            result = (result * base) % MOD;
         }
-        else{
-            maxLen = max(maxLen, currLen);
-            currLen = 1;
-        }
+        base = (base * base) % MOD;
+        n /= 2;
     }
-    maxLen = max(maxLen, currLen);
-    cout << maxLen << "\n";
+    return result;
+}
+
+void solve(){
+    long long n;
+    cin >> n;
+    long long res = power(n);
+    cout << res << "\n";
 }
 
 void init_code(){
