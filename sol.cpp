@@ -5,12 +5,55 @@
 */
 
 #include <bits/stdc++.h>
-#include "debug_utils.h"
 
 using namespace std;
 
+template < class c > struct rge {
+    c b, e;
+};
+template < class c > rge<c> range(c i, c j){
+    return rge<c>{i, j};
+}
+template < class c > auto dud(c* x) -> decltype(cerr << *x, 0);
+template < class c > char dud(...);
+
+struct debug {
+    ~debug() { cerr << endl; }
+    template < class c > typename enable_if<sizeof dud<c>(0) != 1, debug&>::type operator<<(c i) {
+        cerr << boolalpha << i;
+        return * this;
+    }
+    template < class c > typename enable_if<sizeof dud<c>(0) == 1, debug&>::type operator<<(c i) {
+        return * this << range(begin(i), end(i)); 
+    }
+    template < class c, class b > debug & operator << (pair < b, c > d) {
+        return * this << "(" << d.first << ", " << d.second << ")";
+    }
+    template < class c > debug & operator <<(rge<c> d) {
+        *this << "[";
+        for (auto it = d.b; it != d.e; ++it)
+            *this << ", " + 2 * (it == d.b) << *it;
+        return * this << "]";
+    }
+};  
+#define imie(...) " [" << #__VA_ARGS__ " : " << (__VA_ARGS__) << "]"
+
 void solve(){
-    //Code Here....
+    string str;
+    cin >> str;
+    int currLen = 1;
+    int maxLen = 1;
+    for(int i = 1; i < str.size(); ++i){
+        if(str[i] == str[i - 1]){
+            currLen++;
+        }
+        else{
+            maxLen = max(maxLen, currLen);
+            currLen = 1;
+        }
+    }
+    maxLen = max(maxLen, currLen);
+    cout << maxLen << "\n";
 }
 
 void init_code(){
