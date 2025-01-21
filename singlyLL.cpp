@@ -8,7 +8,7 @@
 
 using namespace std;
 
-//node of the linked list
+//node of the linked list using class
 class Node{
 public:
     int data;
@@ -19,6 +19,14 @@ public:
         next = next1;
     }
 };
+
+// print a linked list
+void printLL(Node* head){
+    while(head != NULL){
+        cout << head->data << " ";
+        head = head->next;
+    }
+}
 
 // convert array to linked list
 Node* convert2arr(vector<int> &arr){
@@ -36,10 +44,11 @@ Node* convert2arr(vector<int> &arr){
 int lengthofLL(Node* head){
     int cnt = 0;
     Node* temp = head;
-    while(temp){
+    // traverse the linked list and count the no of nodes
+    while(temp != NULL){
         cout << temp->data << " ";
         temp = temp->next;
-        cnt++;
+        cnt++; // increment the cnt for every nodes traverse
     }
     return cnt;
 }
@@ -47,10 +56,13 @@ int lengthofLL(Node* head){
 //search in the linked list
 int searchLL(Node* head, int val){
     Node* temp = head;
+    // traverse the linked list
     while(temp){
-        if(temp->next == val){
+        // check if the current node data is equal to the desired element
+        if(temp->data == val){
             return 1;
         }
+        // move to the next node
         temp = temp->next;
     }
     return 0;
@@ -69,15 +81,26 @@ Node* removeHead(Node* head){
 
 // delete the tail of the linked list
 Node* removeTail(Node* head){
+    // if the linkedlist is empty or has only one node return NULL
     if(head == NULL || head->next == NULL){
         return NULL;
     }
+
+    // initialise a temporary pointer to traverse the list
     Node* temp = head;
+
+    //traverse to the second last node in the list
     while(temp->next->next == NULL){
         temp = temp->next;
     }
+
+    // delete the last node
     delete temp->next;
+
+    //set the next to the second last node to the nullptr, effectively removing the last node
     temp->next = nullptr;
+
+    // return the head of the modified list
     return head;
 }
 
