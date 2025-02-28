@@ -1,0 +1,67 @@
+set encoding=utf-8
+set fileencoding=utf-8
+set number                  
+set relativenumber         
+set cursorline            
+set background=light      
+set termguicolors          
+set mouse=a                
+set tabstop=4              
+set shiftwidth=4           
+set expandtab               
+set smartindent            
+set clipboard=unnamedplus   
+set ignorecase             
+set smartcase 
+set ruler
+set autoread
+set hlsearch               
+set incsearch    
+set showcmd
+set wildmenu  
+set wildmode=longest:full,full
+syntax on                 
+filetype plugin indent on
+
+autocmd VimEnter * startinsert
+autocmd TextYankPost * silent! lua vim.highlight.on_yank {timeout = 200}
+
+call plug#begin('~/.local/share/nvim/plugged')
+Plug 'preservim/nerdtree'
+Plug 'yegappan/lsp'
+Plug 'jiangmiao/auto-pairs'
+Plug 'dense-analysis/ale'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'Mofiqul/vscode.nvim'
+Plug 'daltonmenezes/aura-theme', { 'rtp': 'packages/neovim' }
+call plug#end()
+
+colorscheme vscode
+
+nnoremap <F2> :NERDTreeToggle<CR>
+let g:airline_powerline_fonts = 1
+nnoremap <leader>dv :DiffviewOpen<CR>
+let g:coc_global_extensions = ['coc-clangd', 'coc-json', 'coc-python', 'coc-tsserver']
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-s> :w<CR>
+nnoremap <C-q> :q<CR>
+vnoremap <C-c> "+y
+nnoremap <C-v> "+p
+inoremap <C-v> <C-r>+
+
+set undofile
+set undodir=~/.config/nvim/undodir
+
+nnoremap <F5> :w<CR>:!g++ -std=c++17 -O2 % -o %< && ./%<<CR>
