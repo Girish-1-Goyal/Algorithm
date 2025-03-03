@@ -73,3 +73,13 @@ This function copies <source> to <destination> and then opens <file> in the curr
 ;; Bind C-c d to open Dired (File Explorer)
 (global-set-key (kbd "C-c d") 'dired)
 
+(defun open-eshell-split ()
+  "Split the window horizontally and open EShell in the bottom pane."
+  (interactive)
+  (split-window-right)       ; Split the current window horizontally.
+  (other-window 1)           ; Move to the newly created window.
+  (eshell))                  ; Launch EShell in that window.
+
+;; Bind the function to a key combination, for example, C-c T.
+(global-set-key (kbd "C-c T") 'open-eshell-split)
+
